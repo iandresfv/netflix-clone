@@ -1,5 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+
+import SignInButton from '@/app/ui/SignInButton';
 import { GithubIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -41,12 +43,12 @@ export default function Login() {
       </div>
 
       <div className="mt-6 flex w-full items-center justify-center gap-x-3">
-        <Button variant="outline" size="icon">
+        <SignInButton provider="github">
           <GithubIcon className="h-4 w-4" />
-        </Button>
-        <Button variant="outline" size="icon">
+        </SignInButton>
+        <SignInButton provider="google">
           <Image src={GoogleIcon} alt="Google Icon" className="h-6 w-6" />
-        </Button>
+        </SignInButton>
       </div>
     </div>
   );
