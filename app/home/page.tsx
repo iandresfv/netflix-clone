@@ -1,3 +1,9 @@
+import { Navbar } from '@/app/ui';
+
 export default function HomePage() {
-  return <div>HomePage</div>;
+  return (
+    <div>
+      <Navbar />
+    </div>
+  );
 }

@@ -1,4 +1,4 @@
-import SignInButton from '@/app/ui/SignInButton';
+import { SignInButton } from '@/app/ui';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { GithubIcon } from 'lucide-react';
