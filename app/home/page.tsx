@@ -1,9 +1,5 @@
-import { Navbar } from '@/app/ui';
+import SeedMovies from '@/app/ui/SeedMovies';
 
 export default function HomePage() {
-  return (
-    <div>
-      <Navbar />
-    </div>
-  );
+  return <SeedMovies />;
 }
