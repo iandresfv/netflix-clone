@@ -1,8 +1,8 @@
-import { fetchMovies } from '@/app/lib/data';
+import { fetchMovie } from '@/app/lib/data';
 import { Button } from '@/components/ui/button';
 
 export default async function MovieVideo() {
-  const data = await fetchMovies();
+  const data = await fetchMovie();
 
   return (
     <div className="flex h-[55vh] w-full items-center justify-start lg:h-[60vh]">
