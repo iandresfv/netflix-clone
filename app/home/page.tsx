@@ -1,5 +1,5 @@
-import SeedMovies from '@/app/ui/SeedMovies';
+import MovieVideo from '../ui/home/MovieVideo';
 
 export default function HomePage() {
-  return <SeedMovies />;
+  return <MovieVideo />;
 }

@@ -1,4 +1,5 @@
-import { SignInButton } from '@/app/ui';
+import { authOptions } from '@/app/lib/auth';
+import SignInButton from '@/app/ui/auth/SignInButton';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { GithubIcon } from 'lucide-react';
@@ -7,7 +8,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import GoogleIcon from '/public/google.svg';
-import { authOptions } from '@/app/lib/auth';
 
 export default async function Login() {
   const session = await getServerSession(authOptions);

@@ -1,8 +1,8 @@
+import Navbar from '@/app/ui/home/Navbar';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import { ReactNode } from 'react';
 import { authOptions } from '../lib/auth';
-import { Navbar } from '../ui';
 
 export default async function layout({ children }: { children: ReactNode }) {
   const session = await getServerSession(authOptions);
