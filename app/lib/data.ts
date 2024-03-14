@@ -12,6 +12,7 @@ export async function fetchMovie() {
       duration: true,
       imageString: true,
       videoSource: true,
+      youtubeString: true,
     },
   });
   return data;

@@ -1,5 +1,5 @@
 import { fetchMovie } from '@/app/lib/data';
-import { Button } from '@/components/ui/button';
+import MovieButtons from './MovieButtons';
 
 export default async function MovieVideo() {
   const data = await fetchMovie();
@@ -20,8 +20,15 @@ export default async function MovieVideo() {
         </h1>
         <p className="mt-5 line-clamp-3 text-lg text-white">{data?.overview}</p>
         <div className="mt-4 flex gap-x-3">
-          <Button>See more</Button>
-          <Button>Learn more</Button>
+          <MovieButtons
+            key={data?.id}
+            age={data?.age as number}
+            title={data?.title as string}
+            release={data?.release as number}
+            duration={data?.duration as number}
+            overview={data?.overview as string}
+            youtubeUrl={data?.youtubeString as string}
+          />
         </div>
       </div>
     </div>
