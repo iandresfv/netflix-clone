@@ -1,5 +1,5 @@
 import prisma from './db';
-import { Movie } from './definitions';
+import { MovieCategory } from './definitions';
 
 export async function fetchMovie() {
   const data = await prisma.movie.findFirst({
@@ -35,6 +35,30 @@ export async function fetchRecentlyAdded() {
       createdAt: 'desc',
     },
     take: 4,
+  });
+  return data;
+}
+
+export async function fetchMoviesByCategory(category: string, userId: string) {
+  const data = await prisma.movie.findMany({
+    select: {
+      id: true,
+      age: true,
+      title: true,
+      release: true,
+      duration: true,
+      overview: true,
+      imageString: true,
+      youtubeString: true,
+      WatchLists: {
+        where: {
+          userId: userId,
+        },
+      },
+    },
+    where: {
+      category: category,
+    },
   });
   return data;
 }
