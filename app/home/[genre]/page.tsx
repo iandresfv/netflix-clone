@@ -1,5 +1,6 @@
 import { authOptions } from '@/app/lib/auth';
 import { fetchMoviesByCategory } from '@/app/lib/data';
+import MovieLayout from '@/app/ui/MovieLayout';
 import { getServerSession } from 'next-auth';
 
 export default async function Categorypage({
@@ -11,11 +12,5 @@ export default async function Categorypage({
   const session = await getServerSession(authOptions);
   const data = await fetchMoviesByCategory(movieCategory, 'abc');
 
-  return (
-    <div>
-      {data.map((movie) => (
-        <h1 key={movie.id}>{movie.title}</h1>
-      ))}
-    </div>
-  );
+  return <MovieLayout data={data} />;
 }
