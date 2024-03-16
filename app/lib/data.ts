@@ -1,6 +1,8 @@
 'use server';
 import { revalidatePath } from 'next/cache';
 import prisma from './db';
+import { authOptions } from './auth';
+import { getServerSession } from 'next-auth';
 
 export async function fetchMovie() {
   const data = await prisma.movie.findFirst({
@@ -19,7 +21,7 @@ export async function fetchMovie() {
   return data;
 }
 
-export async function fetchRecentlyAdded() {
+export async function fetchRecentlyAdded(userId: string) {
   const data = await prisma.movie.findMany({
     select: {
       id: true,
@@ -28,7 +30,11 @@ export async function fetchRecentlyAdded() {
       release: true,
       duration: true,
       overview: true,
-      WatchLists: true,
+      WatchLists: {
+        where: {
+          userId: userId,
+        },
+      },
       imageString: true,
       youtubeString: true,
     },
@@ -93,9 +99,10 @@ export async function addToWatchList(formData: FormData) {
   'use server';
   const pathName = formData.get('pathName') as string;
   const movieId = Number(formData.get('movieId') as string);
+  const session = await getServerSession(authOptions);
   await prisma.watchList.create({
     data: {
-      userId: 'abc',
+      userId: session?.user?.email as string,
       movieId,
     },
   });

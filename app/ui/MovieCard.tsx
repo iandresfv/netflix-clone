@@ -28,8 +28,9 @@ export default function MovieCard({
   youtubeUrl: string;
   watchListId: string;
 }) {
-  const [open, setOpen] = useState<boolean>(false);
   const pathName = usePathname();
+  const [open, setOpen] = useState<boolean>(false);
+
   return (
     <>
       <button className="-mt-14" onClick={() => setOpen(true)}>

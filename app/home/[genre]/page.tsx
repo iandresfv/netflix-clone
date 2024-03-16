@@ -10,7 +10,10 @@ export default async function Categorypage({
 }) {
   const movieCategory = genre === 'recently' ? 'recent' : genre.slice(0, -1);
   const session = await getServerSession(authOptions);
-  const data = await fetchMoviesByCategory(movieCategory, 'abc');
+  const data = await fetchMoviesByCategory(
+    movieCategory,
+    session?.user?.email as string,
+  );
 
   return <MovieLayout data={data} />;
 }

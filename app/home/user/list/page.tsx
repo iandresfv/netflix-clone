@@ -6,7 +6,7 @@ import { getServerSession } from 'next-auth';
 
 export default async function WatchList() {
   const session = await getServerSession(authOptions);
-  const data = await fetchWatchList('abc');
+  const data = await fetchWatchList(session?.user?.email as string);
 
   return (
     <>
