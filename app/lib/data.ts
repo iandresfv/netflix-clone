@@ -1,5 +1,6 @@
+'use server';
+import { revalidatePath } from 'next/cache';
 import prisma from './db';
-import { MovieCategory } from './definitions';
 
 export async function fetchMovie() {
   const data = await prisma.movie.findFirst({
@@ -61,4 +62,54 @@ export async function fetchMoviesByCategory(category: string, userId: string) {
     },
   });
   return data;
+}
+
+export async function fetchWatchList(userId: string) {
+  const data = await prisma.watchList.findMany({
+    select: {
+      id: true,
+      Movie: {
+        select: {
+          id: true,
+          age: true,
+          title: true,
+          release: true,
+          duration: true,
+          overview: true,
+          WatchLists: true,
+          imageString: true,
+          youtubeString: true,
+        },
+      },
+    },
+    where: {
+      userId: userId,
+    },
+  });
+  return data.map((item) => item.Movie);
+}
+
+export async function addToWatchList(formData: FormData) {
+  'use server';
+  const pathName = formData.get('pathName') as string;
+  const movieId = Number(formData.get('movieId') as string);
+  await prisma.watchList.create({
+    data: {
+      userId: 'abc',
+      movieId,
+    },
+  });
+  revalidatePath(pathName);
+}
+
+export async function removeFromWatchList(formData: FormData) {
+  'use server';
+  const pathName = formData.get('pathName') as string;
+  const watchListId = formData.get('watchListId') as string;
+  await prisma.watchList.delete({
+    where: {
+      id: watchListId,
+    },
+  });
+  revalidatePath(pathName);
 }
