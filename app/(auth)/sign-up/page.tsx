@@ -1,4 +1,4 @@
-import SignInButton from '@/app/ui/SignInButton';
+import SignInButton from '@/app/ui/auth/SignInButton';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { GithubIcon } from 'lucide-react';
@@ -17,7 +17,7 @@ export default async function SignUp() {
 
   return (
     <div className="mt-24 rounded bg-black/80 px-6 py-10 md:mt-0 md:max-w-sm md:px-14">
-      <form>
+      <form method="POST" action="/api/auth/signin">
         <h1 className="text-3xl font-semibold text-white">Sign Up</h1>
         <div className="mt-5 space-y-4">
           <Input

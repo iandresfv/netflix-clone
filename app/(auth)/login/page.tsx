@@ -1,4 +1,5 @@
-import SignInButton from '@/app/ui/SignInButton';
+import { authOptions } from '@/app/lib/auth';
+import SignInButton from '@/app/ui/auth/SignInButton';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { GithubIcon } from 'lucide-react';
@@ -7,7 +8,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import GoogleIcon from '/public/google.svg';
-import { authOptions } from '@/app/lib/auth';
 
 export default async function Login() {
   const session = await getServerSession(authOptions);
@@ -17,19 +17,13 @@ export default async function Login() {
 
   return (
     <div className="mt-24 rounded bg-black/80 px-6 py-10 md:mt-0 md:max-w-sm md:px-14">
-      <form>
+      <form method="POST" action="/api/auth/signin">
         <h1 className="text-3xl font-semibold text-white">Sign In</h1>
         <div className="mt-5 space-y-4">
           <Input
             type="email"
             name="email"
             placeholder="Email"
-            className="inline-block w-full bg-[#333] placeholder:text-xs placeholder:text-gray-400"
-          />
-          <Input
-            type="password"
-            name="password"
-            placeholder="Password"
             className="inline-block w-full bg-[#333] placeholder:text-xs placeholder:text-gray-400"
           />
           <Button
